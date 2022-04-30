@@ -1,5 +1,7 @@
 package com.js.workoutappbackend.model;
 
+import com.js.workoutappbackend.security.ApplicationUserRole;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,21 +10,57 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String firstName;
+    private String lastName;
+    private String email;
     @Column(name = "user_name")
-    private String userName;
+    private String username;
     private String password;
-    private boolean active;
-    private String roles;
+    private boolean active = true;
+    private boolean locked  = false;
+    private ApplicationUserRole applicationUserRole;
 
     public User() {
     }
 
-    public User(long id, String userName, String password, boolean active, String roles) {
-        this.id = id;
-        this.userName = userName;
+    public User( String firstName ,String lastName, String email, String username, String password,
+                 ApplicationUserRole applicationUserRole) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.username = username;
         this.password = password;
-        this.active = active;
-        this.roles = roles;
+        this.applicationUserRole = applicationUserRole;
+    }
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public boolean isLocked() {
+        return locked;
+    }
+
+    public void setLocked(boolean locked) {
+        this.locked = locked;
     }
 
     public long getId() {
@@ -33,12 +71,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -57,11 +95,11 @@ public class User {
         this.active = active;
     }
 
-    public String getRoles() {
-        return roles;
+    public ApplicationUserRole getRoles() {
+        return applicationUserRole;
     }
 
-    public void setRoles(String roles) {
-        this.roles = roles;
+    public void setRoles(ApplicationUserRole applicationUserRole) {
+        this.applicationUserRole = applicationUserRole;
     }
 }
