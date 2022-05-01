@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+
 @RestController
 @RequestMapping(path = "api/v1/registration")
 @AllArgsConstructor
@@ -13,8 +15,10 @@ public class UserRegistrationController {
     private UserRegistrationService userRegistrationService;
 
     @PostMapping
-    public String register(@RequestBody UserRegistrationRequest request) {
-        return userRegistrationService.register(request);
+    public void register(HttpServletResponse httpServletResponse) {
+        httpServletResponse.setHeader("Location", "www.google.se");
+        httpServletResponse.setStatus(302);
+        //return userRegistrationService.register();
     }
 
 
