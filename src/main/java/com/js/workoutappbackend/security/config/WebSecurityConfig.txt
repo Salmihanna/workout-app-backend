@@ -24,7 +24,7 @@ import static com.js.workoutappbackend.security.ApplicationUserRole.*;
 
 @Configuration
 @AllArgsConstructor
-@EnableWebSecurity
+//@EnableWebSecurity
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
