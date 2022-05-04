@@ -1,56 +1,60 @@
 package com.js.workoutappbackend.security.config;
 
+import com.js.workoutappbackend.security.jwt.JwtTokenVerifier;
 import com.js.workoutappbackend.service.MyUserDetailService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @AllArgsConstructor
-//@EnableWebSecurity
+@EnableWebSecurity
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final PasswordEncoder passwordEncoder;
+    private final JwtTokenVerifier jwtTokenVerifier;
     private final MyUserDetailService myUserDetailService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-        auth.authenticationProvider(daoAuthenticationProvider());
+        auth.userDetailsService(myUserDetailService);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-        http.csrf().disable()
+        http
+                .cors()
+                .and()
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
-                .anyRequest()
-                .authenticated();
-                //.antMatchers("/admin").hasRole(ADMIN.toString())
-                //.antMatchers("/user").hasRole("USER")
-                //.antMatchers("/api/v*/registration/**").permitAll()
-                // DENNA ANVÄNDS! .antMatchers("/api/v1/login").permitAll().and().apply(new JwtConfigurer(jwtTokenProvider))
-                /*.antMatchers("/").permitAll()
-                .anyRequest()
-                .authenticated()
-                */
+                .antMatchers("/api/v1/login").permitAll()
+                //.antMatchers(HttpMethod.POST, "/api/v1/users/").permitAll()
+                .anyRequest().authenticated()
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.addFilterBefore(jwtTokenVerifier, UsernamePasswordAuthenticationFilter.class);
+
 
     };
 
+
     @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-        provider.setPasswordEncoder(passwordEncoder);
-        provider.setUserDetailsService(myUserDetailService);
-
-        return provider;
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
 //    @Override

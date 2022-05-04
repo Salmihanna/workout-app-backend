@@ -10,13 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping(path = "api/v1/registration")
 @AllArgsConstructor
 public class UserRegistrationController {
-    private UserRegistrationService userRegistrationService;
 
     @PostMapping
     public void register(HttpServletResponse httpServletResponse) {
-        httpServletResponse.setHeader("Location", "www.google.se");
-        httpServletResponse.setStatus(302);
+//        httpServletResponse.setHeader("Location", "www.google.se");
+//        httpServletResponse.setStatus(302);
         //return userRegistrationService.register();
+
+
+
     }
 
 
