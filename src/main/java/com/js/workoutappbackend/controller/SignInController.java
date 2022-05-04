@@ -1,8 +1,5 @@
 package com.js.workoutappbackend.controller;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.js.workoutappbackend.model.SignIn;
-import com.js.workoutappbackend.model.UserRegistrationRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

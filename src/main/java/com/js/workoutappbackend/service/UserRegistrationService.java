@@ -1,15 +1,11 @@
 package com.js.workoutappbackend.service;
 
-import com.js.workoutappbackend.model.ConfirmationToken;
 import com.js.workoutappbackend.model.User;
 import com.js.workoutappbackend.model.UserRegistrationRequest;
 import com.js.workoutappbackend.repository.EmailRepository;
 import com.js.workoutappbackend.security.ApplicationUserRole;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
 
 @Service
 @AllArgsConstructor
