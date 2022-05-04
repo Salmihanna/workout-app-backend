@@ -2,7 +2,7 @@ package com.js.workoutappbackend.security.config;
 
 import com.js.workoutappbackend.model.User;
 import com.js.workoutappbackend.security.ApplicationUserRole;
-import com.js.workoutappbackend.security.jwt.JwtTokenProvider;
+//import com.js.workoutappbackend.security.jwt.JwtTokenProvider;
 import com.js.workoutappbackend.service.MyUserDetailService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +25,13 @@ import static com.js.workoutappbackend.security.ApplicationUserRole.*;
 @Configuration
 @AllArgsConstructor
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
     private final MyUserDetailService myUserDetailService;
-    @Autowired
-    JwtTokenProvider jwtTokenProvider;
+    /* @Autowired
+    JwtTokenProvider jwtTokenProvider;*/
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
@@ -42,7 +42,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll();
+                .antMatchers("/**").permitAll()
+                .anyRequest()
+                .authenticated();
                 //.antMatchers("/admin").hasRole(ADMIN.toString())
                 //.antMatchers("/user").hasRole("USER")
                 //.antMatchers("/api/v*/registration/**").permitAll()
