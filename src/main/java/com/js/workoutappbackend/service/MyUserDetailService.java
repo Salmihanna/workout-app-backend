@@ -34,6 +34,10 @@ public class MyUserDetailService implements UserDetailsService {
         return user.map(MyUserDetails::new).get();
     }
 
+    public boolean isValidUser(MyUserDetails userDetails, String password) {
+        return bCryptPasswordEncoder.matches(password, userDetails.getPassword());
+    }
+
     public String signUpUser(User user) {
         String encodedPassword;
         String token;
