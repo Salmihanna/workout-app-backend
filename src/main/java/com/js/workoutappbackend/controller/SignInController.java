@@ -23,11 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 @AllArgsConstructor
 public class SignInController {
 
-//     @PostMapping
-//    public String signIn(@ModelAttribute("signin") SignIn signIn) {
-//         System.out.println(signIn.getEmail() + " " + signIn.getPassword());
-//         return "{\"success\": true}";
-//     }
     private final static String INCORRECT_MSG = "Incorrect username or password";
     private final AuthenticationManager authenticationManager;
     private final MyUserDetailService myUserDetailService;
@@ -35,13 +30,6 @@ public class SignInController {
 
     @PostMapping
 public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authRequest) throws Exception  {
-//    try {
-//        authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
-//    } catch (BadCredentialsException e) {
-//        throw new Exception(INCORRECT_MSG, e);
-//    }
-
 
     final MyUserDetails myUserDetails = (MyUserDetails) myUserDetailService.loadUserByUsername(authRequest.getUsername());
     if (myUserDetailService.isValidUser(myUserDetails, authRequest.getPassword()) == false) {

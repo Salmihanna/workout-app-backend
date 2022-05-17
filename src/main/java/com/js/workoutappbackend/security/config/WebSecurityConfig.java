@@ -18,7 +18,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @AllArgsConstructor
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtTokenVerifier jwtTokenVerifier;
@@ -32,9 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http
-                .cors()
-                .and()
-                .csrf().disable()
+             .cors().and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/api/v1/sign-in").permitAll()
@@ -46,8 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     };
 
-
-    @Bean
+    @Bean    
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -57,24 +53,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
-//    @Override
-//    @Bean
-//    protected UserDetailsService userDetailsService() {
-//        UserDetails benny = User.builder()
-//                .username("user")
-//                .password(passwordEncoder.encode("123"))
-//                .roles("USER")
-//                //.authorities(USER.getGrantedAuthorities())
-//                .build();
-//
-//        UserDetails masterBenny = User.builder()
-//                .username("admin")
-//                .password(passwordEncoder.encode("123"))
-//                .roles("USER")
-//                //.authorities(ADMIN.getGrantedAuthorities())
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(benny);
-//    };
 }

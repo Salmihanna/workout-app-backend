@@ -1,6 +1,7 @@
 package com.js.workoutappbackend.model;
 
 import javax.persistence.*;
+// import java.util.Set;
 
 @Entity
 @Table(name = "exercise")
@@ -13,11 +14,13 @@ public class Exercise {
     @Column(name = "description")
     private String description;
 
+//    @ManyToMany(mappedBy = "workoutWithExercises")
+//    private Set<Workout> workout;
+
     public Exercise() {
     }
 
-    public Exercise(long id, String exerciseName, String description) {
-        this.id = id;
+    public Exercise( String exerciseName, String description) {
         this.exerciseName = exerciseName;
         this.description = description;
     }
