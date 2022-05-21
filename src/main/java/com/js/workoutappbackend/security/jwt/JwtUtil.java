@@ -22,6 +22,7 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class JwtUtil {
 
+    //TODO: Hide key
     private final String SECRET_KEY = "sysmod2021";
     private final UserRepository userRepository;
 

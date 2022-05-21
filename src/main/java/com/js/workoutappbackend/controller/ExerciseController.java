@@ -13,8 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/api/v1")
 public class ExerciseController {
-    @Autowired
-    private ExerciseRepository exerciseRepository;
 
     //get Home
     @GetMapping("/")
@@ -34,8 +32,5 @@ public class ExerciseController {
         return ("<h1>Welcome admin</h1>");
     };
 
-    // Get all exercise
-    @CrossOrigin
-    @GetMapping("/exercises")
-    public List<Exercise> getAllExercises() {return exerciseRepository.findAll();}
+
 }

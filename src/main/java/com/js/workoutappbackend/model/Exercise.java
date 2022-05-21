@@ -1,7 +1,7 @@
 package com.js.workoutappbackend.model;
 
 import javax.persistence.*;
-// import java.util.Set;
+import java.util.Set;
 
 @Entity
 @Table(name = "exercise")
@@ -14,8 +14,8 @@ public class Exercise {
     @Column(name = "description")
     private String description;
 
-//    @ManyToMany(mappedBy = "workoutWithExercises")
-//    private Set<Workout> workout;
+    @ManyToMany(mappedBy = "workoutWithExercises", fetch = FetchType.LAZY)
+    private Set<Workout> workout;
 
     public Exercise() {
     }

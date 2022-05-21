@@ -31,15 +31,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http
-             .cors().and().csrf().disable()
+                .cors()
+                .and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/api/v1/sign-in").permitAll()
-                //.antMatchers(HttpMethod.POST, "/api/v1/users/").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.addFilterBefore(jwtTokenVerifier, UsernamePasswordAuthenticationFilter.class);
 
+        http.addFilterBefore(jwtTokenVerifier, UsernamePasswordAuthenticationFilter.class);
 
     };
 
