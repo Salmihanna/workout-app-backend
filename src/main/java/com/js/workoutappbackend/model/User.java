@@ -3,6 +3,7 @@ package com.js.workoutappbackend.model;
 import com.js.workoutappbackend.security.ApplicationUserRole;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -19,6 +20,9 @@ public class User {
     private boolean active = true;
     private boolean locked  = false;
     private ApplicationUserRole applicationUserRole;
+
+    @OneToMany(mappedBy = "user")
+    private Set<UserAndWorkout> userAndWorkouts;
 
     public User() {
     }
