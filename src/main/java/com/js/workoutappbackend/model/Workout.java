@@ -20,6 +20,7 @@ public class Workout {
     private String workoutName;
     private String description;
     private String image;
+    private String category;
     private int duration;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
@@ -30,10 +31,17 @@ public class Workout {
     )
     private Set<Exercise> workoutWithExercises;
 
-    public Workout(String workoutName, String description, String image, int duration) {
+    // @OneToMany(mappedBy = "workout")
+    // private Set<UserAndWorkout> userAndWorkouts;
+
+//    @ManyToMany(mappedBy = "userAndWorkout", fetch = FetchType.LAZY)
+//    private Set<User> users;
+
+    public Workout(String workoutName, String description, String image, String category, int duration) {
         this.workoutName = workoutName;
         this.description = description;
         this.image = image;
+        this.category = category;
         this.duration = duration;
     }
 }
