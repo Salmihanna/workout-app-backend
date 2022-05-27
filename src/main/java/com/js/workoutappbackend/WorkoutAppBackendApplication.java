@@ -22,6 +22,7 @@ public class WorkoutAppBackendApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/v1/sign-in").allowedOrigins("http://localhost:3000");
+                registry.addMapping("/api/v1/registration").allowedOrigins("http://localhost:3000");
             }
         };
     }
